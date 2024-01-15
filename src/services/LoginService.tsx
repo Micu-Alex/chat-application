@@ -1,8 +1,9 @@
 import Cookies from "js-cookie";
+import { backend_URL } from "../utils/constants";
 
 export const loginUser = async (email: string, password: string) => {
   try {
-    const response = await fetch("http://localhost:3000/api/auth", {
+    const response = await fetch(`${backend_URL}/api/auth`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

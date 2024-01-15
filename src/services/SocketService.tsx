@@ -3,6 +3,7 @@ import { io } from "socket.io-client";
 import Cookies from "js-cookie";
 import User from "../entities/Users";
 import Message from "../entities/Messages";
+import { backend_URL } from "../utils/constants";
 
 interface Props {
   setUsersData: (users: User[]) => void;
@@ -35,7 +36,7 @@ const SocketClient = ({
     }
 
     //io set up
-    const socket = io("http://localhost:3000", {
+    const socket = io(backend_URL, {
       auth: {
         token: token,
       },
