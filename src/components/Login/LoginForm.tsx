@@ -10,10 +10,12 @@ import {
   Title,
 } from "./Login.styles";
 import { loginUser } from "../../services/LoginService";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -21,7 +23,7 @@ const LoginForm = () => {
       <Form
         onSubmit={(e) => {
           e.preventDefault();
-          loginUser(email, password);
+          loginUser(email, password, navigate);
         }}
       >
         <FormGroup>

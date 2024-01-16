@@ -3,7 +3,8 @@ import { backend_URL } from "../utils/constants";
 export const registerUser = async (
   email: string,
   name: string,
-  password: string
+  password: string,
+  navigate: Function
 ) => {
   try {
     const response = await fetch(`${backend_URL}/api/users`, {
@@ -16,7 +17,7 @@ export const registerUser = async (
     if (response.ok) {
       const token = await response.text();
       Cookies.set("token", token, { expires: 7, secure: true });
-      window.location.href = "/";
+      navigate("/");
     } else {
       const errorData = await response.text();
       alert(errorData);

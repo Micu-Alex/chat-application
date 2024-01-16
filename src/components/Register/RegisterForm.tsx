@@ -1,4 +1,4 @@
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import {
   Container,
   Title,
@@ -15,6 +15,7 @@ const RegisterForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -22,7 +23,7 @@ const RegisterForm = () => {
       <Form
         onSubmit={(e) => {
           e.preventDefault();
-          registerUser(email, name, password);
+          registerUser(email, name, password, navigate);
         }}
       >
         <FormGroup>

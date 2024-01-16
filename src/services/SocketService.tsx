@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import User from "../entities/Users";
 import Message from "../entities/Messages";
 import { backend_URL } from "../utils/constants";
+import { Navigate } from "react-router-dom";
 
 interface Props {
   setUsersData: (users: User[]) => void;
@@ -26,15 +27,12 @@ const SocketClient = ({
 
   //deals with initial setup of socket
 
+  const token = Cookies.get("token");
+  if (!token) {
+    return <Navigate to={"/login"} />;
+  }
+
   useEffect(() => {
-    //auth token setup
-    const token = Cookies.get("token");
-
-    if (!token) {
-      window.location.href = "/login";
-      return;
-    }
-
     //io set up
     const socket = io(backend_URL, {
       auth: {

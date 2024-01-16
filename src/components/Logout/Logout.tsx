@@ -1,13 +1,14 @@
 import { Button } from "./logout.styles";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const Logout = () => {
+  const navigate = useNavigate();
   return (
     <Button
       onClick={() => {
-        redirect("/login");
         Cookies.remove("token");
+        return navigate("/login");
       }}
     >
       Logout

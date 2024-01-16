@@ -1,7 +1,11 @@
 import Cookies from "js-cookie";
 import { backend_URL } from "../utils/constants";
 
-export const loginUser = async (email: string, password: string) => {
+export const loginUser = async (
+  email: string,
+  password: string,
+  navigate: Function
+) => {
   try {
     const response = await fetch(`${backend_URL}/api/auth`, {
       method: "POST",
@@ -13,7 +17,7 @@ export const loginUser = async (email: string, password: string) => {
     if (response.ok) {
       const token = await response.text();
       Cookies.set("token", token, { expires: 7, secure: true });
-      window.location.href = "/";
+      navigate("/");
     } else {
       const errorMessage = await response.text();
       alert(errorMessage);
