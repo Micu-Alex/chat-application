@@ -20,9 +20,9 @@ function App() {
   const [selectedUser, setSelectedUser] = useState<User>();
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMeassage, setNewMessage] = useState<string | undefined>();
+  const [file, setFile] = useState<File | undefined>();
 
   const currentUserName = getCurrentUser(usersData);
-  //add comment
   makeUsersOnline(usersData, onlineUsers);
 
   return (
@@ -32,6 +32,8 @@ function App() {
         selectedUser={selectedUser}
         setMessages={setMessages}
         newMessage={newMeassage}
+        setFile={setFile}
+        file={file}
         setOnlineUsers={setOnlineUsers}
         setNewMessage={setNewMessage}
       />
@@ -48,6 +50,7 @@ function App() {
             messages={messages}
             currentUser={currentUserName}
             setNewMessage={setNewMessage}
+            setFile={setFile}
             selectedUser={selectedUser}
           />
         ) : (

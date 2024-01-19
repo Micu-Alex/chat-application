@@ -17,6 +17,7 @@ interface Props {
   currentUser: string | undefined;
   setNewMessage: (message: string) => void;
   selectedUser: User | undefined;
+  setFile: (img: File) => void;
 }
 
 const Chat = ({
@@ -24,6 +25,7 @@ const Chat = ({
   currentUser,
   setNewMessage,
   selectedUser,
+  setFile,
 }: Props) => {
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
 
@@ -51,7 +53,11 @@ const Chat = ({
         ))}
       </ChatContainer>
       <InputWrapper>
-        <Input setNewMessage={setNewMessage} selectedUser={selectedUser} />
+        <Input
+          setNewMessage={setNewMessage}
+          selectedUser={selectedUser}
+          setFile={setFile}
+        />
       </InputWrapper>
     </>
   );

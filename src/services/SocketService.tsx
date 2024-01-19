@@ -12,6 +12,8 @@ interface Props {
   selectedUser: User | undefined;
   setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
   newMessage: string | undefined;
+  setFile: (img: File | undefined) => void;
+  file: File | undefined;
   setNewMessage: (message: undefined) => void;
 }
 
@@ -21,6 +23,8 @@ const SocketClient = ({
   selectedUser,
   setMessages,
   newMessage,
+  setFile,
+  file,
   setNewMessage,
 }: Props) => {
   const socketRef = useRef<any>(null);
@@ -119,11 +123,22 @@ const SocketClient = ({
 
   //deals with new messages
   useEffect(() => {
-    if (newMessage && newMessage.trim() !== "") {
-      socketRef.current.emit("chat message", {
-        msg: newMessage,
-        toUserID: selectedUser?.userID,
-      });
+    if (newMessage !== undefined) {
+      if (file) {
+        socketRef.current.emit("upload", {
+          type: "file",
+          body: file,
+          mimeType: file.type,
+          fileName: file.name,
+        });
+        setFile(undefined);
+      } else if (newMessage.trim() !== "") {
+        // It's a text message
+        socketRef.current.emit("chat message", {
+          msg: newMessage,
+          toUserID: selectedUser?.userID,
+        });
+      }
       setNewMessage(undefined);
     }
   }, [newMessage]);
