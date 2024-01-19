@@ -5,6 +5,7 @@ This is the front end of the ChatApp project, built with Vite, React, TypeScript
 ## Try it Yourself
 
 Try out the application at [Chat Application](https://chat-application-delta-indol.vercel.app/).
+NOTE: It might take 1 minute for the host to wake up
 
 Please note that the application is currently in development, and you may experience occasional lag. We value your feedback and would appreciate it if you could report any issues or provide suggestions for improvement. To do so, [submit an issue](https://github.com/Micu-Alex/chat-application/issues) on our GitHub repository.
 
