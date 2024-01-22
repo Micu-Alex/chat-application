@@ -63,3 +63,20 @@ export const MessageText = styled.p`
   margin-top: 3px;
   max-width: 100%;
 `;
+
+interface ImgContinerProps {
+  $enlarged?: boolean;
+}
+export const ImgContiner = styled.div<ImgContinerProps>`
+  max-width: ${(props) => (props.$enlarged ? "100%" : "540px")};
+  max-height: 100%;
+  overflow: hidden;
+  cursor: ${(props) => (props.$enlarged ? "zoom-out" : "zoom-in")};
+
+  img {
+    width: ${(props) => (props.$enlarged ? "100%" : "540px")};
+    height: auto;
+    transition: max-width 0.6s ease-in-out;
+    cursor: inherit;
+  }
+`;

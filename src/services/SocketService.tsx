@@ -105,12 +105,26 @@ const SocketClient = ({
   //deals with old messages
   useEffect(() => {
     socketRef.current.on("chat message", (data: any) => {
-      const { sender, message } = data;
-      const newMessage: Message = {
-        sender: sender.username,
-        message: message,
-      };
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
+      const { sender, message, file } = data;
+      if (message) {
+        // Handle text message
+        const newMessage: Message = {
+          sender: sender.username,
+          message: message,
+        };
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+      } else if (file) {
+        // Handle file message
+        const newFileMessage: Message = {
+          sender: sender.username,
+          file: {
+            data: file.data,
+            contentType: file.contentType,
+            fileName: file.fileName,
+          },
+        };
+        setMessages((prevMessages) => [...prevMessages, newFileMessage]);
+      }
     });
 
     return () => {
@@ -125,11 +139,12 @@ const SocketClient = ({
   useEffect(() => {
     if (newMessage !== undefined) {
       if (file) {
-        socketRef.current.emit("upload", {
+        socketRef.current.emit("chat message", {
           type: "file",
           body: file,
           mimeType: file.type,
           fileName: file.name,
+          toUserID: selectedUser?.userID,
         });
         setFile(undefined);
       } else if (newMessage.trim() !== "") {

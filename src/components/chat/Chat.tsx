@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Message from "../../entities/Messages";
 import Input from "../Input/Input";
 import {
@@ -9,6 +9,7 @@ import {
   MessageContainer,
   MessageBubble,
   MessageText,
+  ImgContiner,
 } from "./Chat.styles";
 import User from "../../entities/Users";
 
@@ -35,6 +36,12 @@ const Chat = ({
     }
   }, [messages]);
 
+  const [enlargedIndex, setEnlargedIndex] = useState<number | null>(null);
+
+  const toggleEnlarged = (index: number) => {
+    setEnlargedIndex(enlargedIndex === index ? null : index);
+  };
+
   return (
     <>
       <ChatTitle>{selectedUser?.name}</ChatTitle>
@@ -46,7 +53,23 @@ const Chat = ({
                 $bgColor={msg.sender !== currentUser ? "#e5e5ea" : "#dcf8c6"}
                 $isCurrentUser={msg.sender === currentUser}
               >
-                <MessageText ref={endOfMessagesRef}>{msg.message}</MessageText>
+                {msg.file ? (
+                  // Display file preview if the message contains a file
+                  <ImgContiner
+                    $enlarged={enlargedIndex === index}
+                    onClick={() => toggleEnlarged(index)}
+                  >
+                    <img
+                      src={`data:${msg.file.contentType};base64,${msg.file.data}`}
+                      alt={msg.file.fileName}
+                    />
+                  </ImgContiner>
+                ) : (
+                  // Display text message if the message doesn't contain a file
+                  <MessageText ref={endOfMessagesRef}>
+                    {msg.message}
+                  </MessageText>
+                )}
               </MessageBubble>
             </MessageContainer>
           </MessageWrapper>
