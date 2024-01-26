@@ -21,6 +21,7 @@ function App() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMeassage, setNewMessage] = useState<string | undefined>();
   const [file, setFile] = useState<File | undefined>();
+  const [notification, setNotification] = useState<string | undefined>("");
 
   const currentUserName = getCurrentUser(usersData);
   makeUsersOnline(usersData, onlineUsers);
@@ -28,6 +29,7 @@ function App() {
   return (
     <AppContainer>
       <SocketClient
+        setNotification={setNotification}
         setUsersData={setUsersData}
         selectedUser={selectedUser}
         setMessages={setMessages}
@@ -36,9 +38,12 @@ function App() {
         file={file}
         setOnlineUsers={setOnlineUsers}
         setNewMessage={setNewMessage}
+        notification={notification}
       />
       <Sidebar>
         <UsersList
+          setNotification={setNotification}
+          notification={notification}
           users={usersData}
           setSelectedUser={setSelectedUser}
           selectedUser={selectedUser}
@@ -48,7 +53,7 @@ function App() {
         {selectedUser ? (
           <Chat
             messages={messages}
-            currentUser={currentUserName}
+            currentUser={currentUserName?.name}
             setNewMessage={setNewMessage}
             setFile={setFile}
             selectedUser={selectedUser}

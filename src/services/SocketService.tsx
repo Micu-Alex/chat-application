@@ -15,6 +15,8 @@ interface Props {
   setFile: (img: File | undefined) => void;
   file: File | undefined;
   setNewMessage: (message: undefined) => void;
+  setNotification: (notification: string | undefined) => void;
+  notification: string | undefined;
 }
 
 const SocketClient = ({
@@ -26,6 +28,7 @@ const SocketClient = ({
   setFile,
   file,
   setNewMessage,
+  setNotification,
 }: Props) => {
   const socketRef = useRef<any>(null);
 
@@ -157,6 +160,18 @@ const SocketClient = ({
       setNewMessage(undefined);
     }
   }, [newMessage]);
+
+  useEffect(() => {
+    socketRef.current.on("notification", (senderID: string) => {
+      setNotification(senderID);
+    });
+    return () => {
+      // Clean up the 'notification' event listener
+      if (socketRef.current) {
+        socketRef.current.off("notification");
+      }
+    };
+  }, [setNotification]);
 
   return null;
 };

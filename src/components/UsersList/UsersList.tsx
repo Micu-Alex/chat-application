@@ -2,22 +2,43 @@ import User from "../../entities/Users";
 import { Container, Title, ListContainer, UserItem, Dot } from "./Users.styles";
 import { getCurrentUser } from "../../utils/userUtils";
 import Logout from "../Logout/Logout";
+import { IoMdMail } from "react-icons/io";
 
 interface Props {
   users: User[];
   setSelectedUser: React.Dispatch<React.SetStateAction<User | undefined>>;
   selectedUser: User | undefined;
+  notification: string | undefined;
+  setNotification: (notification: string | undefined) => void;
 }
 
-const UsersList = ({ users, setSelectedUser, selectedUser }: Props) => {
-  const currentUserName = getCurrentUser(users);
+const UsersList = ({
+  users,
+  setSelectedUser,
+  selectedUser,
+  notification,
+  setNotification,
+}: Props) => {
+  const currentUser = getCurrentUser(users);
   const handleUserClick = (user: User) => {
     setSelectedUser(user);
+    setNotification("");
+  };
+
+  const handelNotifiaction = (
+    selectedUserID: string | undefined,
+    userID: string,
+    notificationID: string | undefined
+  ) => {
+    if (userID === notificationID && selectedUserID !== notificationID) {
+      return true;
+    }
+    return false;
   };
 
   return (
     <Container>
-      <Title>{currentUserName}</Title>
+      <Title>{currentUser?.name}</Title>
       <ListContainer>
         {users
           .filter((user) => !user.self)
@@ -29,6 +50,15 @@ const UsersList = ({ users, setSelectedUser, selectedUser }: Props) => {
             >
               <Dot color={user.status === "online" ? "green" : "grey"} />
               Name: {user.name}
+              {handelNotifiaction(
+                selectedUser?.userID,
+                user.userID,
+                notification
+              ) ? (
+                <IoMdMail style={{ marginLeft: "auto" }} color="green" />
+              ) : (
+                <></>
+              )}
             </UserItem>
           ))}
         <Logout />
