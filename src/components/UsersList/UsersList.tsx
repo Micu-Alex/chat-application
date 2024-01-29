@@ -22,18 +22,9 @@ const UsersList = ({
   const currentUser = getCurrentUser(users);
   const handleUserClick = (user: User) => {
     setSelectedUser(user);
-    setNotification("");
-  };
-
-  const handelNotifiaction = (
-    selectedUserID: string | undefined,
-    userID: string,
-    notificationID: string | undefined
-  ) => {
-    if (userID === notificationID && selectedUserID !== notificationID) {
-      return true;
+    if (user.userID === notification) {
+      setNotification("");
     }
-    return false;
   };
 
   return (
@@ -50,11 +41,7 @@ const UsersList = ({
             >
               <Dot color={user.status === "online" ? "green" : "grey"} />
               Name: {user.name}
-              {handelNotifiaction(
-                selectedUser?.userID,
-                user.userID,
-                notification
-              ) ? (
+              {user.userID === notification ? (
                 <IoMdMail style={{ marginLeft: "auto" }} color="green" />
               ) : (
                 <></>
