@@ -22,6 +22,8 @@ function App() {
   const [newMeassage, setNewMessage] = useState<string | undefined>();
   const [file, setFile] = useState<File | undefined>();
   const [notification, setNotification] = useState<string | undefined>("");
+  const [Typing, setTyping] = useState<boolean>(false);
+  const [userTyping, setUserTyping] = useState<string | undefined>();
 
   const currentUserName = getCurrentUser(usersData);
   makeUsersOnline(usersData, onlineUsers);
@@ -39,6 +41,8 @@ function App() {
         setOnlineUsers={setOnlineUsers}
         setNewMessage={setNewMessage}
         notification={notification}
+        Typing={Typing}
+        setUserTyping={setUserTyping}
       />
       <Sidebar>
         <UsersList
@@ -57,6 +61,9 @@ function App() {
             setNewMessage={setNewMessage}
             setFile={setFile}
             selectedUser={selectedUser}
+            setTyping={setTyping}
+            Typing={Typing}
+            userTyping={userTyping}
           />
         ) : (
           <WelcomeStatement>

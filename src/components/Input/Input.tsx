@@ -6,9 +6,17 @@ interface Props {
   setNewMessage: (message: string) => void;
   selectedUser: User | undefined;
   setFile: (img: File) => void;
+  setTyping: (userTyping: boolean) => void;
+  Typing: boolean;
 }
 
-const Input = ({ setNewMessage, selectedUser, setFile }: Props) => {
+const Input = ({
+  setNewMessage,
+  selectedUser,
+  setFile,
+  setTyping,
+  Typing,
+}: Props) => {
   const [inputValue, setInputValue] = useState("");
 
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -22,11 +30,18 @@ const Input = ({ setNewMessage, selectedUser, setFile }: Props) => {
     if (event.key === "Enter" && inputValue.trim() !== "") {
       setNewMessage(inputValue.trim());
       setInputValue("");
+      setTyping(false);
     }
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+    const newValue = event.target.value;
+    setInputValue(newValue);
+    if (newValue !== "" && !Typing) {
+      setTyping(true);
+    } else if (newValue === "") {
+      setTyping(false);
+    }
   };
 
   const selectFile = (e: React.ChangeEvent<HTMLInputElement>) => {

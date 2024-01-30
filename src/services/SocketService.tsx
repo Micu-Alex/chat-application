@@ -17,6 +17,8 @@ interface Props {
   setNewMessage: (message: undefined) => void;
   setNotification: (notification: string | undefined) => void;
   notification: string | undefined;
+  Typing: boolean;
+  setUserTyping: (userID: string | undefined) => void;
 }
 
 const SocketClient = ({
@@ -29,6 +31,8 @@ const SocketClient = ({
   file,
   setNewMessage,
   setNotification,
+  Typing,
+  setUserTyping,
 }: Props) => {
   const socketRef = useRef<any>(null);
 
@@ -161,6 +165,7 @@ const SocketClient = ({
     }
   }, [newMessage]);
 
+  //deals with notifications
   useEffect(() => {
     socketRef.current.on("notification", (senderID: string) => {
       setNotification(senderID);
@@ -172,6 +177,22 @@ const SocketClient = ({
       }
     };
   }, [setNotification]);
+
+  //deals with user typing
+  useEffect(() => {
+    console.log(Typing);
+
+    socketRef.current.emit("user typing", {
+      Typing: Typing,
+      selectedUser: selectedUser?.userID,
+    });
+  }, [Typing]);
+
+  useEffect(() => {
+    socketRef.current.on("user typing", (userTyping: string) => {
+      setUserTyping(userTyping);
+    });
+  }, [setUserTyping]);
 
   return null;
 };
