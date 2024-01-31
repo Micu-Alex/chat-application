@@ -168,7 +168,12 @@ const SocketClient = ({
   //deals with notifications
   useEffect(() => {
     socketRef.current.on("notification", (senderID: string) => {
-      setNotification(senderID);
+      if (selectedUser?.userID !== senderID) {
+        console.log(senderID);
+        console.log(selectedUser);
+
+        setNotification(senderID);
+      }
     });
     return () => {
       // Clean up the 'notification' event listener
@@ -176,12 +181,10 @@ const SocketClient = ({
         socketRef.current.off("notification");
       }
     };
-  }, [setNotification]);
+  }, [setNotification, selectedUser]);
 
   //deals with user typing
   useEffect(() => {
-    console.log(Typing);
-
     socketRef.current.emit("user typing", {
       Typing: Typing,
       selectedUser: selectedUser?.userID,
