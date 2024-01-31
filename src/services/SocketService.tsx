@@ -169,9 +169,6 @@ const SocketClient = ({
   useEffect(() => {
     socketRef.current.on("notification", (senderID: string) => {
       if (selectedUser?.userID !== senderID) {
-        console.log(senderID);
-        console.log(selectedUser);
-
         setNotification(senderID);
       }
     });
