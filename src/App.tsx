@@ -51,6 +51,7 @@ function App() {
           users={usersData}
           setSelectedUser={setSelectedUser}
           selectedUser={selectedUser}
+          userTyping={userTyping}
         />
       </Sidebar>
       <MainContent>
@@ -63,7 +64,6 @@ function App() {
             selectedUser={selectedUser}
             setTyping={setTyping}
             Typing={Typing}
-            userTyping={userTyping}
           />
         ) : (
           <WelcomeStatement>

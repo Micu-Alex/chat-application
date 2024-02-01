@@ -10,6 +10,7 @@ interface Props {
   selectedUser: User | undefined;
   notification: string | undefined;
   setNotification: (notification: string | undefined) => void;
+  userTyping: string | undefined;
 }
 
 const UsersList = ({
@@ -18,6 +19,7 @@ const UsersList = ({
   selectedUser,
   notification,
   setNotification,
+  userTyping,
 }: Props) => {
   const currentUser = getCurrentUser(users);
   const handleUserClick = (user: User) => {
@@ -46,6 +48,9 @@ const UsersList = ({
               ) : (
                 <></>
               )}
+              {user.userID === userTyping ? (
+                <div style={{ marginLeft: "auto" }}>Typing...</div>
+              ) : null}
             </UserItem>
           ))}
         <Logout />

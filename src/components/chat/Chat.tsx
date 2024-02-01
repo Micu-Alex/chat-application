@@ -21,7 +21,6 @@ interface Props {
   setFile: (img: File) => void;
   setTyping: (userTyping: boolean) => void;
   Typing: boolean;
-  userTyping: string | undefined;
 }
 
 const Chat = ({
@@ -32,7 +31,6 @@ const Chat = ({
   setFile,
   setTyping,
   Typing,
-  userTyping,
 }: Props) => {
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
 
@@ -80,16 +78,6 @@ const Chat = ({
             </MessageContainer>
           </MessageWrapper>
         ))}
-        {userTyping && userTyping !== currentUser ? (
-          <MessageContainer $isCurrentUser={currentUser === userTyping}>
-            <MessageBubble
-              $bgColor={userTyping !== currentUser ? "#e5e5eb" : "#dcf8c6"}
-            >
-              {" "}
-              Typing...{" "}
-            </MessageBubble>
-          </MessageContainer>
-        ) : null}
       </ChatContainer>
       <InputWrapper>
         <Input
