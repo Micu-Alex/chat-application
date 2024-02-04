@@ -53,3 +53,13 @@ export const Dot = styled.div`
   border-radius: 50%;
   background-color: ${(props) => props.color || "gray"};
 `;
+
+export const NotificationsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+`;
+
+export const NotificationCount = styled.span`
+  margin-right: 2px;
+`;

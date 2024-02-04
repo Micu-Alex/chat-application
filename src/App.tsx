@@ -21,17 +21,25 @@ function App() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMeassage, setNewMessage] = useState<string | undefined>();
   const [file, setFile] = useState<File | undefined>();
-  const [notification, setNotification] = useState<string | undefined>("");
+  const [notifications, setNotifications] = useState<string[]>([]);
   const [Typing, setTyping] = useState<boolean>(false);
   const [userTyping, setUserTyping] = useState<string | undefined>();
 
   const currentUserName = getCurrentUser(usersData);
+
   makeUsersOnline(usersData, onlineUsers);
+
+  const notificationCount =
+    notifications.length > 0 ? notifications.length : null;
 
   return (
     <AppContainer>
+      <title>
+        ChatApp &nbsp;
+        {notificationCount}
+      </title>
       <SocketClient
-        setNotification={setNotification}
+        setNotifications={setNotifications}
         setUsersData={setUsersData}
         selectedUser={selectedUser}
         setMessages={setMessages}
@@ -40,14 +48,14 @@ function App() {
         file={file}
         setOnlineUsers={setOnlineUsers}
         setNewMessage={setNewMessage}
-        notification={notification}
+        notifications={notifications}
         Typing={Typing}
         setUserTyping={setUserTyping}
       />
       <Sidebar>
         <UsersList
-          setNotification={setNotification}
-          notification={notification}
+          setNotifications={setNotifications}
+          notifications={notifications}
           users={usersData}
           setSelectedUser={setSelectedUser}
           selectedUser={selectedUser}

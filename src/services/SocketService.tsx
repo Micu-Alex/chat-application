@@ -15,8 +15,8 @@ interface Props {
   setFile: (img: File | undefined) => void;
   file: File | undefined;
   setNewMessage: (message: undefined) => void;
-  setNotification: (notification: string | undefined) => void;
-  notification: string | undefined;
+  setNotifications: React.Dispatch<React.SetStateAction<string[]>>;
+  notifications: string[];
   Typing: boolean;
   setUserTyping: (userID: string | undefined) => void;
 }
@@ -30,7 +30,7 @@ const SocketClient = ({
   setFile,
   file,
   setNewMessage,
-  setNotification,
+  setNotifications,
   Typing,
   setUserTyping,
 }: Props) => {
@@ -169,7 +169,10 @@ const SocketClient = ({
   useEffect(() => {
     socketRef.current.on("notification", (senderID: string) => {
       if (selectedUser?.userID !== senderID) {
-        setNotification(senderID);
+        setNotifications((notifications: string[]) => [
+          ...notifications,
+          senderID,
+        ]);
       }
     });
     return () => {
@@ -178,7 +181,7 @@ const SocketClient = ({
         socketRef.current.off("notification");
       }
     };
-  }, [setNotification, selectedUser]);
+  }, [setNotifications, selectedUser]);
 
   //deals with user typing
   useEffect(() => {

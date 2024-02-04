@@ -1,5 +1,13 @@
 import User from "../../entities/Users";
-import { Container, Title, ListContainer, UserItem, Dot } from "./Users.styles";
+import {
+  Container,
+  Title,
+  ListContainer,
+  UserItem,
+  Dot,
+  NotificationsContainer,
+  NotificationCount,
+} from "./Users.styles";
 import { getCurrentUser } from "../../utils/userUtils";
 import Logout from "../Logout/Logout";
 import { IoMdMail } from "react-icons/io";
@@ -8,8 +16,8 @@ interface Props {
   users: User[];
   setSelectedUser: React.Dispatch<React.SetStateAction<User | undefined>>;
   selectedUser: User | undefined;
-  notification: string | undefined;
-  setNotification: (notification: string | undefined) => void;
+  notifications: string[];
+  setNotifications: React.Dispatch<React.SetStateAction<string[]>>;
   userTyping: string | undefined;
 }
 
@@ -17,15 +25,17 @@ const UsersList = ({
   users,
   setSelectedUser,
   selectedUser,
-  notification,
-  setNotification,
+  notifications,
+  setNotifications,
   userTyping,
 }: Props) => {
   const currentUser = getCurrentUser(users);
   const handleUserClick = (user: User) => {
     setSelectedUser(user);
-    if (user.userID === notification) {
-      setNotification("");
+    if (notifications.includes(user.userID)) {
+      setNotifications((prevNotifications) =>
+        prevNotifications.filter((noti) => noti !== user.userID)
+      );
     }
   };
 
@@ -43,8 +53,16 @@ const UsersList = ({
             >
               <Dot color={user.status === "online" ? "green" : "grey"} />
               Name: {user.name}
-              {user.userID === notification ? (
-                <IoMdMail style={{ marginLeft: "auto" }} color="green" />
+              {notifications.includes(user.userID) ? (
+                <NotificationsContainer>
+                  <NotificationCount>
+                    {
+                      notifications.filter((noti) => noti === user.userID)
+                        .length
+                    }
+                  </NotificationCount>
+                  <IoMdMail color="green" />
+                </NotificationsContainer>
               ) : (
                 <></>
               )}
