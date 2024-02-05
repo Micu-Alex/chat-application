@@ -9,3 +9,17 @@ export const InputField = styled.input`
   outline: none;
   font-size: 15px;
 `;
+
+export const FileInput = styled.input`
+  display: none;
+`;
+
+export const FileInputLabel = styled.label`
+  background-color: grey;
+  color: white;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 25px;
+  font-size: 15px;
+  margin: 6px;
+`;

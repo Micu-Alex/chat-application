@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { InputField } from "./Input.styles";
+import { FileInput, FileInputLabel, InputField } from "./Input.styles";
 import User from "../../entities/Users";
 
 interface Props {
@@ -61,7 +61,8 @@ const Input = ({
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
       />
-      <input type="file" onChange={selectFile} />
+      <FileInputLabel htmlFor="fileInput">Attach File</FileInputLabel>
+      <FileInput type="file" id="fileInput" onChange={selectFile} />
     </>
   );
 };
