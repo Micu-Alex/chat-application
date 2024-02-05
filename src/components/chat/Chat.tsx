@@ -81,11 +81,13 @@ const Chat = ({
       </ChatContainer>
       <InputWrapper>
         <Input
-          Typing={Typing}
-          setTyping={setTyping}
-          setNewMessage={setNewMessage}
-          selectedUser={selectedUser}
-          setFile={setFile}
+          {...{
+            Typing,
+            setTyping,
+            setNewMessage,
+            selectedUser,
+            setFile,
+          }}
         />
       </InputWrapper>
     </>
