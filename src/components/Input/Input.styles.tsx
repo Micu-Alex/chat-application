@@ -15,6 +15,8 @@ export const FileInput = styled.input`
 `;
 
 export const FileInputLabel = styled.label`
+  display: flex;
+  align-items: center;
   background-color: grey;
   color: white;
   padding: 10px 15px;

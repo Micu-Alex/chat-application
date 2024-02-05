@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FileInput, FileInputLabel, InputField } from "./Input.styles";
 import User from "../../entities/Users";
+import { FaPaperclip } from "react-icons/fa";
 
 interface Props {
   setNewMessage: (message: string) => void;
@@ -61,7 +62,9 @@ const Input = ({
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
       />
-      <FileInputLabel htmlFor="fileInput">Attach File</FileInputLabel>
+      <FileInputLabel htmlFor="fileInput">
+        <FaPaperclip />
+      </FileInputLabel>
       <FileInput type="file" id="fileInput" onChange={selectFile} />
     </>
   );
