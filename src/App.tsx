@@ -19,7 +19,7 @@ function App() {
   const [onlineUsers, setOnlineUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<User>();
   const [messages, setMessages] = useState<Message[]>([]);
-  const [newMeassage, setNewMessage] = useState<string | undefined>();
+  const [newMessage, setNewMessage] = useState<string | undefined>();
   const [file, setFile] = useState<File | undefined>();
   const [notifications, setNotifications] = useState<string[]>([]);
   const [Typing, setTyping] = useState<boolean>(false);
@@ -39,39 +39,45 @@ function App() {
         {notificationCount}
       </title>
       <SocketClient
-        setNotifications={setNotifications}
-        setUsersData={setUsersData}
-        selectedUser={selectedUser}
-        setMessages={setMessages}
-        newMessage={newMeassage}
-        setFile={setFile}
-        file={file}
-        setOnlineUsers={setOnlineUsers}
-        setNewMessage={setNewMessage}
-        notifications={notifications}
-        Typing={Typing}
-        setUserTyping={setUserTyping}
+        {...{
+          setNotifications,
+          setUsersData,
+          selectedUser,
+          setMessages,
+          newMessage,
+          setFile,
+          file,
+          setOnlineUsers,
+          setNewMessage,
+          notifications,
+          Typing,
+          setUserTyping,
+        }}
       />
       <Sidebar>
         <UsersList
-          setNotifications={setNotifications}
-          notifications={notifications}
-          users={usersData}
-          setSelectedUser={setSelectedUser}
-          selectedUser={selectedUser}
-          userTyping={userTyping}
+          {...{
+            setNotifications,
+            notifications,
+            users: usersData,
+            setSelectedUser,
+            selectedUser,
+            userTyping,
+          }}
         />
       </Sidebar>
       <MainContent>
         {selectedUser ? (
           <Chat
-            messages={messages}
-            currentUser={currentUserName?.name}
-            setNewMessage={setNewMessage}
-            setFile={setFile}
-            selectedUser={selectedUser}
-            setTyping={setTyping}
-            Typing={Typing}
+            {...{
+              messages,
+              currentUser: currentUserName?.name,
+              setNewMessage,
+              setFile,
+              selectedUser,
+              setTyping,
+              Typing,
+            }}
           />
         ) : (
           <WelcomeStatement>
