@@ -1,13 +1,15 @@
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   Title,
   FormGroup,
   Label,
   Input,
+  Form,
   Button,
   StyledLink,
-} from "./Register.styles";
+  Card,
+} from "../../commonStyles/Form.styles";
 import { registerUser } from "../../services/RegisterService";
 import { useState } from "react";
 
@@ -19,43 +21,48 @@ const RegisterForm = () => {
 
   return (
     <Container>
-      <Title>Register</Title>
-      <Form
-        onSubmit={(e) => {
-          e.preventDefault();
-          registerUser(email, name, password, navigate);
-        }}
-      >
-        <FormGroup>
-          <Label htmlFor="email">Email:</Label>
-          <Input
-            type="text"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="username">Username:</Label>
-          <Input
-            type="text"
-            id="username"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="password">Password:</Label>
-          <Input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormGroup>
-        <Button type="submit">Register</Button>
-        <StyledLink to="/login">I already have an account.</StyledLink>
-      </Form>
+      <Card>
+        <Title>Register</Title>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            registerUser(email, name, password, navigate);
+          }}
+        >
+          <FormGroup>
+            <Label htmlFor="email">Email:</Label>
+            <Input
+              type="text"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="username">Username:</Label>
+            <Input
+              type="text"
+              id="username"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="password">Password:</Label>
+            <Input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </FormGroup>
+          <Button type="submit">Register</Button>
+          <Label>
+            Already have an account? Log in{" "}
+            <StyledLink to="/register">here</StyledLink>{" "}
+          </Label>
+        </Form>
+      </Card>
     </Container>
   );
 };

@@ -9,7 +9,7 @@ import {
   Label,
   StyledLink,
   Title,
-} from "./Login.styles";
+} from "../../commonStyles/Form.styles";
 import { loginUser } from "../../services/LoginService";
 import { useNavigate } from "react-router-dom";
 

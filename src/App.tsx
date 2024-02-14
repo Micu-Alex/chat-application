@@ -12,7 +12,7 @@ import {
   Sidebar,
   SubStatement,
   WelcomeStatement,
-} from "./App.styles";
+} from "./commonStyles/App.styles";
 import Chat from "./components/chat/Chat";
 function App() {
   const [usersData, setUsersData] = useState<User[]>([]);
