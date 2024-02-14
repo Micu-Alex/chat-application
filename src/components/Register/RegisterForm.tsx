@@ -59,7 +59,7 @@ const RegisterForm = () => {
           <Button type="submit">Register</Button>
           <Label>
             Already have an account? Log in{" "}
-            <StyledLink to="/register">here</StyledLink>{" "}
+            <StyledLink to="/login">here</StyledLink>{" "}
           </Label>
         </Form>
       </Card>
