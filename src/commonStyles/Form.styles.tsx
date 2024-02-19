@@ -23,7 +23,6 @@ export const Card = styled.div`
 
 export const Title = styled.h3`
   color: #333;
-  text-shadow: -1px 3px 5px rgba(0, 0, 0, 0.2);
   margin-bottom: 35px;
 `;
 
