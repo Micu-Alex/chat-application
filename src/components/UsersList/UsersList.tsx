@@ -7,7 +7,6 @@ import {
   NotificationsContainer,
   NotificationCount,
 } from "./Users.styles";
-import Logout from "../Logout/Logout";
 import { IoMdMail } from "react-icons/io";
 
 interface Props {
