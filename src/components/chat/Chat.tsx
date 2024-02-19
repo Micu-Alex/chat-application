@@ -52,7 +52,7 @@ const Chat = ({
           <MessageWrapper key={index}>
             <MessageContainer $isCurrentUser={msg.sender === currentUser}>
               <MessageBubble
-                $bgColor={msg.sender !== currentUser ? "#D9D9D9" : "#5FFF78"}
+                $bgColor={msg.sender !== currentUser ? "#D9D9D9" : "#dcf8c6"}
                 $isCurrentUser={msg.sender === currentUser}
               >
                 {msg.file ? (
