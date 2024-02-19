@@ -11,9 +11,11 @@ import {
   MainContent,
   Sidebar,
   SubStatement,
+  TopBar,
   WelcomeStatement,
 } from "./commonStyles/App.styles";
 import Chat from "./components/chat/Chat";
+import UserProfileBar from "./components/UserProfileBar/UserProfileBar";
 function App() {
   const [usersData, setUsersData] = useState<User[]>([]);
   const [onlineUsers, setOnlineUsers] = useState<User[]>([]);
@@ -54,6 +56,9 @@ function App() {
           setUserTyping,
         }}
       />
+      <TopBar>
+        <UserProfileBar {...{ usersData, selectedUser }} />
+      </TopBar>
       <Sidebar>
         <UsersList
           {...{

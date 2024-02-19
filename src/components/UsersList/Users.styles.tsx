@@ -3,13 +3,8 @@ import styled, { css } from "styled-components";
 export const Container = styled.div`
   height: 95%;
   padding: 20px;
-  background-color: #f4f2e3;
+  background-color: #f5f5f5;
   border-right: 1px solid #e0e0e0;
-`;
-
-export const Title = styled.h2`
-  text-align: center;
-  color: #333;
 `;
 
 export const ListContainer = styled.ul`
@@ -30,7 +25,7 @@ export const UserItem = styled.li<UserItemProps>`
   cursor: pointer;
 
   &:hover {
-    background-color: #dbd9ca; /* Hover color */
+    background-color: rgba(68, 68, 74, 8%); /* Hover color */
   }
 
   img {
@@ -43,7 +38,7 @@ export const UserItem = styled.li<UserItemProps>`
   ${(props) =>
     props.$isSelected &&
     css`
-      background-color: #dbd9ca;
+      background-color: rgba(68, 68, 74, 16%);
     `}
 `;
 export const Dot = styled.div`

@@ -2,27 +2,16 @@ import styled from "styled-components";
 
 export const ChatContainer = styled.div`
   padding: 10px;
-  background-color: #f3f1e0;
+  background-color: rgba(68, 68, 74, 5%);
   display: flex;
   flex: 1;
   flex-direction: column;
 `;
 
-export const ChatTitle = styled.h2`
-  text-align: left;
-  color: #333;
-  padding: 10px 0 10px 10px;
-  margin: 0;
-  position: sticky;
-  top: 0;
-  background-color: #dbd9ca;
-  z-index: 1;
-`;
-
 export const InputWrapper = styled.div`
   display: flex;
   align-items: center;
-  background-color: #dbd9ca;
+  background-color: #44444a;
   padding: 10px;
   position: sticky;
   bottom: 0;
@@ -45,6 +34,7 @@ export const MessageContainer = styled.div<MessageContainerProps>`
   justify-content: ${(props) =>
     props.$isCurrentUser ? "flex-end" : "flex-start"};
 `;
+
 export const MessageBubble = styled.div<MessageContainerProps>`
   border-radius: 8px;
   background-color: ${(props) => props.$bgColor || "white"};
@@ -58,6 +48,7 @@ export const MessageBubble = styled.div<MessageContainerProps>`
 `;
 
 export const MessageText = styled.p`
+  color: #080809;
   padding: 0 5px;
   margin-bottom: 0px;
   margin-top: 3px;
@@ -67,6 +58,7 @@ export const MessageText = styled.p`
 interface ImgContinerProps {
   $enlarged?: boolean;
 }
+
 export const ImgContiner = styled.div<ImgContinerProps>`
   max-width: ${(props) => (props.$enlarged ? "100%" : "540px")};
   max-height: 100%;

@@ -55,6 +55,10 @@ const Input = ({
   };
   return (
     <>
+      <FileInputLabel htmlFor="fileInput">
+        <FaPaperclip size={25} color="#5FFF78" />
+      </FileInputLabel>
+      <FileInput type="file" id="fileInput" onChange={selectFile} />
       <InputField
         ref={inputRef}
         placeholder="Enter your message..."
@@ -62,10 +66,6 @@ const Input = ({
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
       />
-      <FileInputLabel htmlFor="fileInput">
-        <FaPaperclip />
-      </FileInputLabel>
-      <FileInput type="file" id="fileInput" onChange={selectFile} />
     </>
   );
 };

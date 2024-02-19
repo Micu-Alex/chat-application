@@ -1,13 +1,17 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-  padding: 10px;
-  background-color: #494843;
+
+  height: 25px; 
+  width: 20%;
+  background-color: #7758DC; 
   color: #fff;
   border: none;
-  border-radius: 3px;
+  border-radius: 6px; 
   cursor: pointer;
-  font-size: 16px;
-  position: absolute;
-  bottom: 10px;
+  font-size: 14px; 
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #CA58DC; 
 `;

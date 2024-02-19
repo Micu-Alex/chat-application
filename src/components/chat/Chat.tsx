@@ -4,7 +4,6 @@ import Input from "../Input/Input";
 import {
   ChatContainer,
   MessageWrapper,
-  ChatTitle,
   InputWrapper,
   MessageContainer,
   MessageBubble,
@@ -48,13 +47,12 @@ const Chat = ({
 
   return (
     <>
-      <ChatTitle>{selectedUser?.name}</ChatTitle>
       <ChatContainer>
         {messages.map((msg, index) => (
           <MessageWrapper key={index}>
             <MessageContainer $isCurrentUser={msg.sender === currentUser}>
               <MessageBubble
-                $bgColor={msg.sender !== currentUser ? "#e5e5ea" : "#dcf8c6"}
+                $bgColor={msg.sender !== currentUser ? "#D9D9D9" : "#5FFF78"}
                 $isCurrentUser={msg.sender === currentUser}
               >
                 {msg.file ? (

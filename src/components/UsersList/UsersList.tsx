@@ -1,14 +1,12 @@
 import User from "../../entities/Users";
 import {
   Container,
-  Title,
   ListContainer,
   UserItem,
   Dot,
   NotificationsContainer,
   NotificationCount,
 } from "./Users.styles";
-import { getCurrentUser } from "../../utils/userUtils";
 import Logout from "../Logout/Logout";
 import { IoMdMail } from "react-icons/io";
 
@@ -29,7 +27,6 @@ const UsersList = ({
   setNotifications,
   userTyping,
 }: Props) => {
-  const currentUser = getCurrentUser(users);
   const handleUserClick = (user: User) => {
     setSelectedUser(user);
     if (notifications.includes(user.userID)) {
@@ -41,7 +38,6 @@ const UsersList = ({
 
   return (
     <Container>
-      <Title>{currentUser?.name}</Title>
       <ListContainer>
         {users
           .filter((user) => !user.self)
@@ -71,7 +67,6 @@ const UsersList = ({
               ) : null}
             </UserItem>
           ))}
-        <Logout />
       </ListContainer>
     </Container>
   );
