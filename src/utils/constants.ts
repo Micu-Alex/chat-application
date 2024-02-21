@@ -1,2 +1,2 @@
-export const backend_URL = "https://test2-68gj.onrender.com"
+export const backend_URL = "https://chatapp-server-db-production.up.railway.app"
 
